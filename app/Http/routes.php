@@ -25,4 +25,9 @@ Route::get('/','Outside\UserControllers@getLogin');
 
 Route::group(['prefix' => 'inside'],function (){
     Route::controller('users','Inside\UserControllers');
+
+});
+
+Route::get('result',function (){
+    return View('outside.Result.result');
 });
