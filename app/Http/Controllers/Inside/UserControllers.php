@@ -23,33 +23,36 @@ class UserControllers extends MyController{
         $this->data['params'] = $this->_params;
         parent::__construct($options);
 
-        $this->data['title'] = 'User';
+
         $this->data['controllerName'] = 'users';
 
         $this->_model = new UserModels();
     }
     public function getIndex(){
+        $this->data['title'] = 'Trang chủ';
         return view("{$this->data['moduleName']}/{$this->data['controllerName']}.index",$this->buildDataView($this->data));
 
     }
 
 
     public function getLogin(){
+        $this->data['title'] = 'Đăng nhập hệ thống';
 
         return view("{$this->data['moduleName']}/{$this->data['controllerName']}.login", $this->buildDataView($this->data));
+//        return view("/inside/users/");
     }
 
     public function postLogin(UserRequests $requests){
         $post = $requests->all();
 
         if($this->_model->login($post)){
-            return redirect(("{$this->data['moduleName']}/{$this->data['controllerName']}/index"));
+            return redirect(("{$this->data['moduleName']}/places/show-all"));
         }else{
             return redirect(("{$this->data['moduleName']}/{$this->data['controllerName']}/login"));
         }
     }
     public function getSignup(){
-
+        $this->data['title'] = 'Đăng kí tài khoản';
         return view("{$this->data['moduleName']}/{$this->data['controllerName']}.signup",$this->buildDataView($this->data));
     }
 

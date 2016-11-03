@@ -34,5 +34,9 @@ return [
 		'key' => '',
 		'secret' => '',
 	],
-
+    'facebook' => [
+        'client_id' => '672329992933441',
+        'client_secret' => '1af1be5f13ae2ca9edec1481343de215',
+        'redirect' => '',
+    ],
 ];
