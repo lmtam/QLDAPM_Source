@@ -93,19 +93,8 @@ class PlaceModels extends DbTable{
             $obj->dulieu    = $item;
 
             array_push($result,$obj);
-            //array_push($result);
-
-            echo ("<h3><font color=\"blue\">");
-            echo ($data_tendiadiem->TenDiaDiem).": </h3></font>";
-            echo ($data_tendichvu->TenDichVu)." - ";
-            echo ($item->SoNha).",";
-            echo ($data_tenduong->TenDuong).",";
-            echo ($data_tenphuong->TenPhuong).",";
-            echo ($data_tenquanhuyen->TenQuanHuyen).",";
-            echo ($data_tentinhthanh->TenTinhThanh)."<br>";
         }
-        echo("FSaf");
-       // return $result;
+        return $result;
     }
 
     public function search($tukhoa){
