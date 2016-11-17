@@ -11,14 +11,14 @@ class PlaceModel extends DbTable{
     {
         parent::__construct($options);
         $this->table = 'dulieu';
-
+        $this->timestamp = false;
         $this->params = \Request::all();
 
     }
     
     public function getDetail($MaDuLieu){
         $select = DB::table('dulieu')
-                ->select ('dulieu.MaDuLieu','dulieu.SoNha','tendiadiem.TenDiaDiem','dichvu.TenDichVu','duong.TenDuong','phuong.TenPhuong','quanhuyen.TenQuanHuyen','tinhthanh.TenTinhThanh', 'dichvu.TenDichVu')
+                ->select ('dulieu.MaDuLieu','dulieu.SoNha','tendiadiem.TenDiaDiem','dichvu.TenDichVu','duong.TenDuong','phuong.TenPhuong','quanhuyen.TenQuanHuyen','tinhthanh.TenTinhThanh', 'dichvu.TenDichVu', 'dulieu.KinhDo', 'dulieu.ViDo')
                 ->where('MaDuLieu',$MaDuLieu)
                 ->leftjoin('tendiadiem','tendiadiem.MaTenDiaDiem','=','dulieu.MaTenDiaDiem')
                 ->leftjoin('duong','duong.MaDuong','=','dulieu.MaDuong')
