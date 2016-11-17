@@ -19,15 +19,20 @@ Route::controllers([
 ]);
 
 
-Route::get('/','Outside\UserControllers@getLogin');
 
+Route::group(['prefix' => '/'], function() {
+    Route::get('/diadiem-{MaDuLieu}', ['as' => 'places.getDetail', 'uses' => 'Outside\PlaceControllers@getDetail']);
+//    Route::get('/diadiem-{MaDulieu}','Outside\PlaceControllers@getDetail');
+    Route::get('/login','Outside\UserControllers@getLogin');
+    Route::get('/','Outside\PlaceControllers@getIndex');
+
+
+    Route::get('/search','Outside\PlaceControllers@getSearchResult');
+//    Route::get('detail-{MaDuLieu}','Outside\PlaceControllers@getDetail');
+});
 
 
 Route::group(['prefix' => 'inside'],function (){
     Route::controller('users','Inside\UserControllers');
-
-});
-
-Route::get('result',function (){
-    return View('outside.Result.result');
+    Route::controller('places','Inside\PlaceControllers');
 });

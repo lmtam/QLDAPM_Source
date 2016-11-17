@@ -27,19 +27,21 @@ class UserControllers extends MyController{
         $this->_model = new UserModels();
     }
 
+
+    public function getIndex(){
+        return view("{$this->data['moduleName']}/{$this->data['controllerName']}.index",$this->buildDataView($this->data));
+    }
+
+
     public function getLogin(){
-        return view("{$this->data['moduleName']}/{$this->data['controllerName']}.login",$this->buildDataView($this->data));
+//        return redirect('/test');
+        return view("outside.search",$this->buildDataView($this->data));
     }
     public function postLogin(UserRequests $requests){
         $post = $requests->all();
-        echo "<pre>";
-        var_dump($post);
-        die();
-        $a = $this->_model->login($post);
-//        echo $this->data['moduleName'].'/'. $this->data['controllerName'].'/dashboard';
-//        die();
-        if($a){
-            return redirect("{$this->data['moduleName']}/{$this->data['controllerName']}/dashboard");
+
+        if($this->_model->login($post)){
+            return redirect("{$this->data['moduleName']}/{$this->data['controllerName']}/index");
         }else{
 
         }

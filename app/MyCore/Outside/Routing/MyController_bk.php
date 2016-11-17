@@ -33,28 +33,16 @@ class MyController extends Controller {
         $this->data['controllerNameDefault'] = $controller;
         $this->data['actionNameDefault'] = $action;
 
-        if (!Auth::check() && !in_array($action, array('getLogin', 'postLogin'))) {
-            $loginLink = route('login');
-            header("Location: {$loginLink}");
-            exit();
-        }
+
         $this->data['listSlugs'] = Slug::make();
-        $this->data['pageTitle'] = "FTEL 20";
+        $this->data['pageTitle'] = "myFinder";
 
         $treeMenu = Menus::getTreeMenu('top_header');
         $this->data['listMenu'] = $this->setActiveMenu($treeMenu);
 
         $this->data['listfooterMenu'] = Menus::getTreeMenu('footer');
         $this->data['footerRecruitment'] = CategoryArticleMaps::getListByCategoryId(ARTICLE_ID_RECURUITMENT, null, 3)->get()->toArray();
-        if (Auth::check() && !in_array($action, array('getLogin', 'postLogin','getLogout'))) {
-            $lightbox = Cookie::get('lightbox');
-            if (empty($lightbox)) {
-                $this->data['lightbox'] = CategoryBannerMaps::getByCategoryId(null, null, 1, 'lightbox')->first();
-                if (!empty($this->data['lightbox'])) {
-                    Cookie::queue('lightbox', true, 15);
-                }
-            }
-        }
+
 
         //$this->api = new Api();
         //$menusTop = $this->api->getMenusBySectionName('top');

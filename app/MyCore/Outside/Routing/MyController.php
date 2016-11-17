@@ -43,22 +43,7 @@ class MyController extends Controller {
 //        $this->data['footerRecruitment'] = CategoryArticleMaps::getListByCategoryId(ARTICLE_ID_RECURUITMENT, null, 3)->get()->toArray();
         
         
-        if (!Auth::check() && !in_array($action, array('getLogin', 'postLogin'))) {
-            $loginLink = route('login');
-            Session::put('redirect', URL::full());
-            Session::save();
-            return Redirect::guest($loginLink)->send();
-        }
-        
-        if (Auth::check() && !in_array($action, array('getLogin', 'postLogin', 'getLogout'))) {
-            $lightbox = Cookie::get('lightbox');
-            if (empty($lightbox)) {
-                $this->data['lightbox'] = CategoryBannerMaps::getByCategoryId(null, null, 1, 'lightbox')->first();
-                if (!empty($this->data['lightbox'])) {
-                    Cookie::queue('lightbox', true, 15);
-                }
-            }
-        }
+
 
         //$this->api = new Api();
         //$menusTop = $this->api->getMenusBySectionName('top');
