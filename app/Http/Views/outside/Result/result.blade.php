@@ -9,11 +9,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link href="/assets/inside/css/result.css" rel="stylesheet">
+    <link href="StyleResult.css" rel="stylesheet">
 
 </head>
 <body>
-<h3>&nbsp &nbsp &nbsp Demo màn hình hiển thị kết quả:</h3>
+<h3>&nbsp &nbsp &nbsp Demo màn hình hiển thị kết quả 23:</h3>
 <div class="container">
 
     <!--Dong trên cùng !-->
@@ -50,79 +50,11 @@
 
 
             <!--Noi dung 1 dia diem !-->
-        <div style="border-top:1px solid #ccc;">
-            <div style="width: 5%; float:left; margin-top: 30px">
-                1.
+            <div>
+                <div id="resultsView"><div id="results" style="position: relative;"><ul class="recommendationList"><li class="card singleRecommendation hasPhoto tipWithLogging highlight select" data-id="57403c6c498e61fb4c15b6ff" data-tipid="575d4dbccd102c62e01d3e15"><div class="indexCol"><span class="venueIndex">1.</span><div class="outOfBoundsContainer"></div></div><div class="contentHolder"><div class="infoCol"><div class="venueBlock"><div class="venueDetails"><div class="venueName"><h2><a href="/v/maison-marou-saigon/57403c6c498e61fb4c15b6ff" target="_blank">Maison Marou Saigon</a></h2></div><div class="venueMeta"><div class="venueScore positive" title="" style="background-color: #73CF42;">8.3</div><div class="venueAddressData"><div class="venueAddress">167 - 169 Calmette, Nguyen Thai Binh Ward, District 1 (Le Thi Hong Gam), Thành phố Hồ Chí Minh</div><div class="venueData"><span class="venueDataItem"><span class="categoryName">Desserts</span><span class="delim"> • </span></span><span class="venueDataItem"><span class="price" title=""><span class="darken" itemprop="priceRange">$</span>$$$</span><span class="delim"> • </span></span></div></div></div></div></div><div class="detail tips "><ul class="tips"><li class="tip"><div class="avatar"><img src="https://irs2.4sqi.net/img/user/64x64/WFHLQATWKK5C3YKL.jpg" alt="Charly L." class="avatar " width="64" height="64" title="Charly L." data-retina-url="https://irs2.4sqi.net/img/user/128x128/WFHLQATWKK5C3YKL.jpg"></div><p class="tipText"><span class="tipAuthor "><a class="userName" href="/user/35442177" target="_blank">Charly L.</a> • June 12</span>Amazing chocolate <span class="entity tip_taste_match">cakes</span></p></li></ul></div><div class="resultFooter"><div class="buttons"><div class="save-button  inactive"><span class="icon"></span><span class="label">Save</span></div></div></div></div><div class="photoCol"><div class="photoContainer"><img class="photo" src="https://irs2.4sqi.net/img/general/300x300/109699555_PaRSmNygmd4TTSO8dUMCM8p6QrGPwi6yAj0FtvUGlBI.jpg" photo-id="5808bee4498eaeca808f7941" width="300" height="300" alt="" data-retina-url="https://irs2.4sqi.net/img/general/600x600/109699555_PaRSmNygmd4TTSO8dUMCM8p6QrGPwi6yAj0FtvUGlBI.jpg"></div></div></div></li><li class="card fewResults"><h4>Only 1 result? Try...</h4><ul class="suggestions"><li class="zoomSuggestion"><span class="link" data-action="zoomOut1">Zooming out</span> to search a bigger area</li><li>Searching for something more general (like <span class="link" data-action="category" data-value="food">Food</span>, <span class="link" data-action="category" data-value="coffee">Coffee</span>, or <span class="link" data-action="category" data-value="drinks">Nightlife</span>)</li><li>Checking your spelling</li></ul><p>Don't see the place you're looking for? <span class="link" data-action="addVenue">Add a new place to foursquare.</span></p></li></ul></div></div>
                 </div>
-            <div style="width: 72%; float:left">
-                <!--Tiêu đề kết quả !-->
-                <div>
-                    <div >
-                        <div >
-                            <div>
-                                <h2><a href="/v/maison-marou-saigon/57403c6c498e61fb4c15b6ff" target="_blank"><span style="font-size: 18px">Maison Marou Saigon</span></a></h2>
-                            </div>
-                            <div>
-                                <div style="width: 8%; float:left">
-                                     <div style="background-color: #73CF42; width: 30px; float:left;height: 30px;border-radius: 50%;">
-                                         <span style="margin-left: 5px;position: relative;top: 5px;
-                                          color: white;font-weight: bold;">8.4</span></div>
-                                </div>
-                                <div style="width: 92%; float:left">
-                                    <div style="font-size: 11px">
-                                       167 - 169 Calmette, Nguyen Thai Binh Ward, District 1 (Le Thi Hong Gam), Thành phố Hồ Chí Minh
-                                    </div>
-                                    <div style="font-size: 11px">
-                                        Desserts<span> • </span><span>$$$$</span>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Hết Tiêu đề kết quả !-->
-
-
-                    <div style="margin-left: 7px; font-size: 12px">
-                        </br> </br> </br>
-                                <img src="https://irs1.4sqi.net/img/general/cap/30/justifications_bestlist_20161010a.png" width="15" height="15"> One of the
-                                <span style="font-weight: bold">top 5</span>
-                                <span style="font-weight: bold">dessert shops</span>&nbsp in <span style="font-weight: bold">Ho Chi Minh City</span>
-
-                    </br> </br>
-                    </div>
-
                 </div>
-
-                <!--Thu hang !-->
-
-                <!--button save !-->
-                <div style="border-top:1px solid #ccc;width: 97%; float:left">
-                    <div >
-                        <div>
-                            <i class="fa fa-bookmark"></i>
-                            <span style="font-size: 11px">Save</span>
-                        </div>
-                    </div>
-                </div>
-                <!--button save !-->
-
-
-            </div>
-
-
-            <!--Hinh ảnh !-->
-            <div style="width: 23%; float:right">
-                <div class="photoContainer">
-                    <img class="photo"
-                         src="https://irs1.4sqi.net/img/general/300x300/2219540_V7IAIyjawQvdlVLa0zkXTTdMhxxWK2yrh64AWLqB9gs.jpg"
-                         photo-id="5803302f38fabdd8cf2a2247" width="135" height="135" style="margin-top: 20px; margin-bottom: 10px"
-                         alt="" data-retina-url="https://irs1.4sqi.net/img/general/600x600/2219540_V7IAIyjawQvdlVLa0zkXTTdMhxxWK2yrh64AWLqB9gs.jpg"></div>
-            </div>
-            <!--Hinh ảnh !-->
-        </div>
-
-        </div>
+     <!-- ------------------- -->
         <div class="col-sm-6">Bản đồ</div>
     </div>
 
