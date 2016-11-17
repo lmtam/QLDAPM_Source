@@ -1,8 +1,11 @@
 <!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 <title>Detail Place</title>
+
 <link href="assets/outside/css/venue-detail-2-123f794815db22e987be8c5222c8aa91.css" rel="stylesheet" type="text/css"/>
 <link href="assets/outside/css/master-a06646f9a770f03d505462e698f959b8.css" rel="stylesheet" type="text/css"/>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body class="notrans withHeaderSearch">
@@ -147,7 +150,7 @@
                             <li class="tipsBtn sectionBtn active">
                                 <a href="/v/sulbing-q-dessert/57caa60a498e614383472099" class="sectionGroup">
                                     <span class="sectionLabel">Tips</span>
-                                    <span class="sectionCount">Count Tip</span>
+                                    <span class="sectionCount">{{count($comment)}}</span>
                                 </a>
                             </li>
                             <li class="photosBtn sectionBtn ">
@@ -182,7 +185,7 @@
                         <div class="tipsSection">
                             <div class="sectionTitle">
                                 <img class="sectionIcon" src="https://ss1.4sqi.net/img/venuepage/v2/section_title_tips-cf2a6004e780a9518fe37521968b56d0.png" height="25" width="25" />
-                                <span class="tipsCount sectionCount">'$Tips Count'</span>
+                                <span class="tipsCount sectionCount">{{count($comment)}}</span>
                                 <span class="tipsText sectionText">Tips and reviews</span>
                                
                             </div>
@@ -216,17 +219,25 @@
                                 </ul>
                             </div>
                             <div class="addTipsSection">
-                                <div class="addTipTeaser">
-                                   
-                                        <div class="userImage">
-                                            <img src="https://ss1.4sqi.net/img/venuepage/v2/add_tip_blank_avatar-92b48188df42db391a669d992defe0b8.png" height="32" width="32" />                                       
-                               
-                                            <input type="text" id="postcmt" name="postcmt">
-                                                <input name="_token" id="_token" hidden="true" value="{!! csrf_token() !!}">
-                                                <button  class="btn-default" id="btnpostCmt">Post</button>
-                                      
-                                        </div>
-                                    
+                                <div class="addTipTeaser">                                   
+                                    <div class="row">
+
+                                        <img src="https://ss1.4sqi.net/img/venuepage/v2/add_tip_blank_avatar-92b48188df42db391a669d992defe0b8.png" height="32" width="32" />
+
+
+                                        <textarea  type="text"  style="maxwidth: 80%; width:80%" class="form-control input-sm" rows="2" id="postcmt" name="postcmt"></textarea>
+
+
+                                        <input name="_token" id="_token" hidden="true" value="{!! csrf_token() !!}">
+
+
+                                        <button type="button"  class="btn btn-default" id="btnpostCmt">Post</button>
+
+                                                                                                            
+                                        
+                                        
+                                        
+                                    </div>                                   
                                 </div>
                             </div>
                             <script>
@@ -237,6 +248,7 @@
                                     
                                     $.post('/test',
                                     {
+                                        userid : 1,
 					madulieu : madulieu,                                 
 					postcmt  : postcmt,          
                                        _token : token
@@ -245,7 +257,7 @@
                                         $("#tipsList").prepend('<li class="tip tipWithLogging useTipUpvotes " data-id="57e3ef71498e0b80da3609cf">'
                                            +'<div class="authorImage">'
                                                 +'<a  href="/user/222737330"  >'+
-                                                    '<img src="https://irs1.4sqi.net/img/user/32x32/222737330-M3RJVUWXX5W1XZ10.png" alt="Vo K." class="avatar "width="32" height="32"title="Vo K."data-retina-url="https://irs1.4sqi.net/img/user/64x64/222737330-M3RJVUWXX5W1XZ10.png" />'
+                                                    '<img src="https://ss1.4sqi.net/img/venuepage/v2/add_tip_blank_avatar-92b48188df42db391a669d992defe0b8.png" height="32" width="32" />'
                                                 +'</a>'
                                             +'</div>'
                                             +'<div class="tipContents">'
@@ -253,17 +265,19 @@
                                                     +'<span class="userName">'
                                                         +'<a href="/user/222737330" > Vo Kim</a>'
                                                     +'</span>'
-                                                    +'<span class="tipDate">September 22</span>+'
-                                                    +'<div class="tipAuthorJustification"></div></div><div class="tipText">'
-                                                +'<span class="entity tip_taste_match">' + data +'</span>'
-                                            +'</div>'
-                                               +' <img class="tipPhoto"src="https://irs0.4sqi.net/img/general/558x200/222737330_dV5DjUMAiCWkl5_UNl6SPWMWRODVx0goGqWvim3q4x8.jpg" photo-id="57e3ef7b498e264f51fbd363" width="558" height="200" alt="" data-retina-url="https://irs0.4sqi.net/img/general/1116x400/222737330_dV5DjUMAiCWkl5_UNl6SPWMWRODVx0goGqWvim3q4x8.jpg" />'
+                                                    +'<span class="tipDate">'+ data['created_day'] +'</span>'
+                                                    +'<div class="tipAuthorJustification">'
+                                                    +'</div>'
+                                                +'</div>'
+                                                +'<div class="tipText">'
+                                                    +'<span class="entity tip_taste_match">' + data['postcmt'] +'</span>'
+                                                +'</div>'
+                                                +' <img class="tipPhoto"src="https://ss1.4sqi.net/img/venuepage/v2/add_tip_blank_avatar-92b48188df42db391a669d992defe0b8.png" photo-id="57e3ef7b498e264f51fbd363" width="558" height="200" alt="" data-retina-url="https://irs0.4sqi.net/img/general/1116x400/222737330_dV5DjUMAiCWkl5_UNl6SPWMWRODVx0goGqWvim3q4x8.jpg" />'
                                                 +'<div class="actionButtons">'
                                                     +'<span class="lastVoteTime"></span>'
                                                 +'</div>'
                                             +'</div>'
-                                        +'</li>');
-//                                        alert(data);
+                                        +'</li>');                                      
                                     }); 
                                 });
                             </script>
@@ -292,7 +306,7 @@
                                         <li class="tip tipWithLogging useTipUpvotes " data-id="57e3ef53498e7ea1e4db8473">
                                             <div class="authorImage">
                                                 <a  href="/user/222737330"  >
-                                                    <img src="https://irs1.4sqi.net/img/user/32x32/222737330-M3RJVUWXX5W1XZ10.png" alt="Vo K." class="avatar "width="32" height="32"title="Vo K."data-retina-url="https://irs1.4sqi.net/img/user/64x64/222737330-M3RJVUWXX5W1XZ10.png" />
+                                                    <img src="https://ss1.4sqi.net/img/venuepage/v2/add_tip_blank_avatar-92b48188df42db391a669d992defe0b8.png" height="32" width="32" />                                                                    
                                                 </a>
                                             </div>
                                             <div class="tipContents">
@@ -300,7 +314,7 @@
                                                     <span class="userName">
                                                         <a href="/user/222737330" >{{$item->fullname}}</a>
                                                     </span>
-                                                    <span class="tipDate">September 22</span>
+                                                    <span class="tipDate">{{$item->created_day}}</span>
                                                     <div class="tipAuthorJustification"></div>
                                                 </div>
                                                 <div class="tipText">
@@ -313,62 +327,7 @@
                                             </div>
                                         </li>
                                         <?php endforeach;?>
-                                        <!---Người thứ nhất-->
-                                        
-                                        <!--Lặp lại bằng js -->
-                                        <li class="tip tipWithLogging useTipUpvotes " data-id="57d54c8d498e0b59f2b41ac6">
-                                            <div class="authorImage">
-                                                <a  href="/user/100182636"  >
-                                                    <img src="https://irs1.4sqi.net/img/user/32x32/100182636-NW40G2PZMG2J1NW0.jpg" alt="Jamie S." class="avatar "width="32" height="32"title="Jamie S."data-retina-url="https://irs1.4sqi.net/img/user/64x64/100182636-NW40G2PZMG2J1NW0.jpg" />
-                                                </a>
-                                                <img src="https://ss0.4sqi.net/img/tip_like-15304d96d5c973561bbdb225059e89f0.png" class="tipAuthorInteractionIcon"/>
-                                            </div>
-                                            <div class="tipContents">
-                                                <div class="tipHeaderRow">
-                                                    <span class="userName">
-                                                        <a href="/user/100182636" >Jamie Seo</a>
-                                                    </span>
-                                                    <span class="tipDate">September 11</span>
-                                                    <div class="tipAuthorJustification"></div>
-                                                </div>
-                                                <div class="tipText">Great bingsu..snow
-                                                    <span class="entity tip_taste_match">Ice cream</span>
-                                                </div>
-                                                <div class="actionButtons">
-                                                    <span class="lastVoteTime"></span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!---Comment của người dùng thứ ...-->
-                                        <li class="tip tipWithLogging useTipUpvotes " data-id="57d3f6f2498e24eaf242c10a">
-                                            <div class="authorImage">
-                                                <a  href="/user/335492241"  >
-                                                    <img src="https://irs2.4sqi.net/img/user/32x32/blank_girl.png" alt="kim v." class="avatar blankAvatar "width="32" height="32"title="kim v."data-retina-url="https://irs2.4sqi.net/img/user/64x64/blank_girl.png" />
-                                                </a>
-                                            </div>
-                                            <div class="tipContents">
-                                                <div class="tipHeaderRow">
-                                                    <span class="userName">
-                                                        <a href="/user/335492241" >kim vo</a>
-                                                    </span>
-                                                    <span class="tipDate">September 10</span>
-                                                    <div class="tipAuthorJustification"></div>
-                                                </div>
-                                                <div class="tipText">We sale
-                                                    <span class="entity tip_taste_match">Ice Cream</span>, Snow
-                                                    <span class="entity tip_taste_match">Ice Cream</span>,
-                                                    <span class="entity tip_taste_match">Bubble Tea</span>,
-                                                    <span class="entity tip_taste_match">Smoothie</span>, Ice Blended,
-                                                    <span class="entity tip_taste_match">Coffee</span>,
-                                                    <span class="entity tip_taste_match">Mojitos</span>,
-                                                    <span class="entity tip_taste_match">Waffle</span>,
-                                                    <span class="entity tip_taste_match">Quesadilla</span>,.
-                                                </div>
-                                                <div class="actionButtons">
-                                                    <span class="lastVoteTime">Downvoted 1 week ago</span>
-                                                </div>
-                                            </div>
-                                        </li>
+                                                                            
                                     </ul>
                                     <!---Kết thúc load comment--->
                                 </div>
@@ -393,7 +352,27 @@
                                              <div class="sideVenueBlock">
                                                <div class="mapSection">
                                                    <div id="vmap">
+                                                   
                                                    </div>
+                                                  <script>
+                                                    function initMap() {
+                                                       var lng = {{$dulieu->KinhDo}};
+                                                       var lat = {{$dulieu->ViDo}};
+                                                      
+                                                      var uluru = {lat: lat, lng: lng};
+                                                      var vmap = new google.maps.Map(document.getElementById('vmap'), {
+                                                        zoom: 16,
+                                                        center: uluru
+                                                      });
+                                                      var marker = new google.maps.Marker({
+                                                        position: uluru,
+                                                        map: vmap
+                                                      });
+                                                    }
+                                                  </script>
+                                                  <script async defer
+                                                  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxy3BQabW8Yw9G1kZFOhUCvTHxn1rXM_M&callback=initMap">
+                                                  </script>
                                                </div>
                                                <div class="venueDetails">
                                                    <div class="addressBlock sideVenueBlockRow">
@@ -404,11 +383,9 @@
                                                          <div class="venueName">Place Name</div>
                                                          <div class="venueAddress">
                                                              <div class="adr" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                                                 <span itemprop="streetAddress">244 Bui Vien Street, Pham Ngu Lao Ward, Dist 1, Hcmc</span>
+                                                                 <span itemprop="streetAddress">{{$dulieu->SoNha}} {{$dulieu->TenDuong}}, {{$dulieu->TenPhuong}}, {{$dulieu->TenQuanHuyen}}, {{$dulieu->TenTinhThanh}}</span>
                                                                  <br>
-                                                                 <span itemprop="addressLocality">Th&agrave;nh ph&#7889; H&#7891; Ch&iacute; Minh</span>
-                                                                 <br>
-                                                                 <span itemprop="addressRegion">Th&agrave;nh ph&#7889; H&#7891; Ch&iacute; Minh</span>
+                                                                 <span itemprop="addressLocality">{{$dulieu->TenTinhThanh}}</span>                                                                                             
                                                                  <br>
                                                                  Vi&#7879;t Nam
                                                              </div>
@@ -445,16 +422,14 @@
                                                   <div class="venueRowIcon">
                                                       <img height="16" width="16" src="https://ss0.4sqi.net/img/venuepage/v2/venue_detail_phone-56d850d0a0506e1ce08284d7b1ad16e7.png" />
                                                   </div>
-                                                  <div class="venueRowContent">
-                                                      <span class="tel" itemprop="telephone">+84 8 3837 6707</span>
-                                                  </div>
+                                                 
                                               </div>
                                               <div class="phoneBlock sideVenueBlockRow">
                                                   <div class="venueRowIcon">
                                                       <img height="16" width="16" src="https://ss0.4sqi.net/img/venuepage/v2/venue_detail_facebook-606d487eea1a45c15090cc00cf01f2c4.png" />
                                                   </div>
                                                   <div class="venueRowContent">
-                                                      <a href="https://facebook.com/sulbingq" target="_blank" class="facebookPageLink"data-sig="qQsK7yHQeelCpaX3J00a+VokdoU=" onmousedown="fourSq.ui.OutgoingLink.mousedown($(this), event)" data-source="venue-detail">sulbingq</a>
+                                                      <a href="https://facebook.com/sulbingq" target="_blank" class="facebookPageLink"data-sig="qQsK7yHQeelCpaX3J00a+VokdoU=" onmousedown="fourSq.ui.OutgoingLink.mousedown($(this), event)" data-source="venue-detail">{{$dulieu->TenDiaDiem}}</a>
                                                   </div>
                                               </div>
                                           </div>
