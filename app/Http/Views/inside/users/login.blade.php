@@ -11,7 +11,6 @@
                 </div>
             @endif
 
-
             <div class="u-form-group">
                 <input type="input" name="username" placeholder="Admin" value="{{ old('username') }}"/>
             </div>
