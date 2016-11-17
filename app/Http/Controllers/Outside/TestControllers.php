@@ -35,12 +35,15 @@ class TestControllers extends MyController{
     public function getDetail(){
         $this->data['dulieu'] = $this->_model->getDetail(163);
         $this->data['comment'] = $this->_model1->getComment(163);
+    
         return view("{$this->data['moduleName']}/users.test",$this->buildDataView($this->data));
     }
     public function postComment(){
         $data1 = \Request::all();
-        $this->data['dulieu'] = $this->_model->getDetail($data1['postcmt']);
-        $this->data['dulieu1'] = $this->_model->getDetail($data1['madulieu']);
-        return $data1['postcmt'];
+        $this->data['comment'] = $this->_model->getDetail($data1['postcmt']);
+        $this->data['dulieu'] = $this->_model->getDetail($data1['madulieu']);
+      
+        $this->_model1->SaveData($data1['postcmt'], $data1['madulieu'], $data1['userid']);
+        return $data1;
     }
 }
