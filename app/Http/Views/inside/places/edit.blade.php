@@ -32,13 +32,41 @@
 
             <div class="panel-body">
 
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="form-field-1">
+                        <strong>Hình đại diện</strong>
+                        <span class="symbol required"></span>
+                    </label>
+                    <div class="col-sm-7 btn-file">
+                        <div class="fileupload-new thumbnail" style="width: 320px; height: 200px; margin-bottom: 3px;">
+                            <?php
+                            if (!empty(old('image_name'))) :
+                                $path = old('image_name');
+                            else :
+                                $path = '/upload/images/' . $dulieu->image_name;
+                            endif;
 
+                            ?>
+
+                            <img class="preview-file-upload" style="width: 320px; height: 190px;" src="{!! $path !!}">
+                        </div>
+
+                        <div class="p-l-file">
+                            <a href="#" data-target="image_name" class="iframe-btn browse-image" type="button">
+                                <i class="fa fa-paperclip"></i>&nbsp;&nbsp;Chọn hình
+                            </a>
+                        </div>
+                        {!! Form::hidden("image_name", $path, ['id' => 'image_name']) !!}
+                        {!! Form::hidden("is_new_image") !!}
+                    </div>
+                </div>
                 <div class="form-group col-sm-12">
                     <label class="col-sm-2 control-label" for="form-field-1">
                         <strong>Tên địa điểm</strong>
                         <span class="symbol required"></span>
                     </label>
                     <div class="col-sm-7">
+                        <input type="hidden" name="MaDuLieu" value="{!! $dulieu->MaDuLieu !!}">
                         <input type="hidden" name="MaTenDiaDiem" value="{!! $dulieu->MaTenDiaDiem !!}">
                         <input type="text" id="TenDiaDiem" name="TenDiaDiem" class="form-control" value="{!! $dulieu->TenDiaDiem !!}">
                         <span class="help-block has-error">{!! $errors->first("TenDiaDiem") !!}</span>
@@ -188,6 +216,33 @@
             CKEDITOR.config.toolbar = 'basic';
             CKEDITOR.replace('ChuThich', CKEDITOR.config);
         });
+        function BrowseServer(name) {
+//            console.log(name);
+            var config = {};
+            config.startupPath = 'Images:/upload/images/';
+            var finder = new CKFinder(config);
+//    finder.basePath = '../';
+            finder.selectActionFunction = SetFileField;
+            finder.selectActionData = name;
+            finder.callback = function (api) {
+                api.disableFolderContextMenuOption('Batch', true);
+            };
+            finder.popup();
+        }
+        function SetFileField(fileUrl, data) {
+            var file = fileUrl.replace(/\/\//g, '/');
+//            console.log(file);
+            $('#' + data["selectActionData"]).val(file);
+            $('#' + data["selectActionData"]).parent().find('.preview-file-upload').attr('src', file);
+        }
+        var browseImage = function () {
+            $('.browse-image').click(function () {
+                var name = $(this).attr('data-target');
+                //openKCFinder();
+                BrowseServer(name);
+            });
+        };
+        browseImage();
     </script>
 
 

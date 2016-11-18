@@ -18,6 +18,13 @@
   <script type="text/javascript" src="./assets/outside/js/build/en/foursquare/new-homepage-d1bebac5ea32225d2079bb1bc4b42c3c.js"></script>
 
 </head>
+<?php
+$url_back = URL::current();
+$url_back = base64_encode($url_back);
+$url_login = route("users.login",['url_back' => $url_back]);
+//    $url_login = '/login';
+
+?>
 <body class="notrans withoutHeaderSearch withProductBar">
   <div id="wrapper"  style="padding-top:0px">
     <div class="desktopHeaderBarDrawerContainer " id="desktopHeaderBarDrawerContainer">
@@ -37,8 +44,8 @@
               <!-- <li class="enterpriseSiteMenuLink"><a href="https://enterprise.foursquare.com/" class="enterprise">Foursquare for Enterprise</a></li> -->
               <li class="aboutMenuLink"><a href="#" class="about">About MyFinder</a></li>
               <!-- <li class="downloadAppMenuLink"><a href="download.html" class="getTheApp">Get the App</a></li> -->
-              <li><a href="https://foursquare.com/login?continue=%2F&amp;clicked=true" class="log btn">Log In</a></li>
-              <li><a href="signup/index.html"  id="signupButton" class="sign btn">Sign Up</a></li>
+              <li><a href="{!! $url_login !!}" class="log btn">Log In</a></li>
+              <li><a href="/signup"  id="signupButton" class="sign btn">Sign Up</a></li>
             </ul>
           </div>
         </div>
@@ -58,11 +65,14 @@
                 </ul>
               </div>
             </div>
+            <?php
+              $url_caphe = route('places.getService',['tendichvu' => 'Quán café']);
+            ?>
             <div class="queryPivotDrawer drawer ">
               <ul class="chiclets">
                 <li class="chiclet topPicks" data-cat="topPicks">
-                  <a class="chicletLink" href="explore9f70.html?cat=topPicks">
-                    <span class="chicletText">Top Picks</span>
+                  <a class="chicletLink" href="{!! $url_caphe !!}">
+                    <span class="chicletText">Cafe</span>
                   </a>
                 </li>
                 <li class="chiclet trending" data-cat="trending">
@@ -76,7 +86,7 @@
                   </a>
                 </li>
                 <li class="chiclet coffee" data-cat="coffee">
-                  <a class="chicletLink" href="explore9863.html?cat=coffee">
+                  <a class="chicletLink" href="{!! $url_caphe !!}">
                     <span class="chicletText">Coffee</span>
                   </a>
                 </li>
@@ -138,7 +148,7 @@
                   </a>
                 </li>
                 <li class="coffee simpleChiclet">
-                  <a class="chicletLink" href="explore113e.html?near=Ho%20Chi%20Minh%20City&amp;cat=coffee">
+                  <a class="chicletLink" href="{!! $url_caphe !!}">
                     <span class="chicletText">Coffee</span>
                   </a>
                 </li>

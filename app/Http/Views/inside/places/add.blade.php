@@ -34,6 +34,33 @@
 
 
                 <div class="form-group col-sm-12">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="form-field-1">
+                            <strong>Hình đại diện</strong>
+                            <span class="symbol required"></span>
+                        </label>
+                        <div class="col-sm-7 btn-file">
+                            <div class="fileupload-new thumbnail" style="width: 320px; height: 200px; margin-bottom: 3px;">
+                                <?php
+                                if (strlen(old('image_name'))) :
+                                    $path = old('image_name');
+                                else :
+                                    $path = '/assets/inside/img/320x190.jpg';
+                                endif;
+                                ?>
+                                <img class="preview-file-upload" id="srcupload" style="width: 320px; height: 190px;" src="{!! $path !!}">
+                            </div>
+                            <div class="p-l-file">
+
+                                <a href="#" data-target="image_name" class="iframe-btn browse-image" type="button" style="border: 0.5px black solid;">
+                                    <i class="fa fa-paperclip"></i>&nbsp;&nbsp;Chọn hình
+                                </a>
+                            </div>
+                            {!! Form::hidden("image_name", null, ['id' => 'image_name']) !!}
+                            {!! Form::hidden("is_new_image", 1) !!}
+                            <span class="help-block has-error">{!! $errors->first("image_name") !!}</span>
+                        </div>
+                    </div>
                     <label class="col-sm-2 control-label" for="form-field-1">
                         <strong>Tên địa điểm</strong>
                         <span class="symbol required"></span>
@@ -152,6 +179,33 @@
             CKEDITOR.config.toolbar = 'basic';
             CKEDITOR.replace('ChuThich', CKEDITOR.config);
         });
+        function BrowseServer(name) {
+//            console.log(name);
+            var config = {};
+            config.startupPath = 'Images:/upload/images/';
+            var finder = new CKFinder(config);
+//    finder.basePath = '../';
+            finder.selectActionFunction = SetFileField;
+            finder.selectActionData = name;
+            finder.callback = function (api) {
+                api.disableFolderContextMenuOption('Batch', true);
+            };
+            finder.popup();
+        }
+        function SetFileField(fileUrl, data) {
+            var file = fileUrl.replace(/\/\//g, '/');
+//            console.log(file);
+            $('#' + data["selectActionData"]).val(file);
+            $('#' + data["selectActionData"]).parent().find('.preview-file-upload').attr('src', file);
+        }
+        var browseImage = function () {
+            $('.browse-image').click(function () {
+                var name = $(this).attr('data-target');
+                //openKCFinder();
+                BrowseServer(name);
+            });
+        };
+        browseImage();
 
     </script>
 

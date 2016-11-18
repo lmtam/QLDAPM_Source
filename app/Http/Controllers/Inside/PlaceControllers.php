@@ -51,7 +51,9 @@ class PlaceControllers extends MyController{
     }
     public function postAdd(PlaceRequests $requests){
         $post = $requests->all();
-
+        echo "<pre>";
+        print_r($post);
+        die();
         if($this->_model->add($post) != null){
             return redirect("{$this->data['moduleName']}/{$this->data['controllerName']}/show-all");
         }
@@ -70,10 +72,14 @@ class PlaceControllers extends MyController{
         $this->data['quanhuyen']= $this->_model->getAllQuanHuyen();
         $this->data['tinhthanh']= $this->_model->getAllTinhThanh();
         $this->data['dichvu']   = $this->_model->getAllDichVu();
+
         return view("{$this->data['moduleName']}/{$this->data['controllerName']}.edit",$this->buildDataView($this->data));
     }
     public function postEdit(PlaceRequests $requests){
         $post = $requests->all();
+//        echo "<pre>";
+//        print_r($post);
+//        die();
         if($this->_model->edit($post) != null){
             return redirect("/{$this->data['moduleName']}/{$this->data['controllerName']}/show-all");
         }
