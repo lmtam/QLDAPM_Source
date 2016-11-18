@@ -4,8 +4,7 @@
 
 <link href="assets/outside/css/venue-detail-2-123f794815db22e987be8c5222c8aa91.css" rel="stylesheet" type="text/css"/>
 <link href="assets/outside/css/master-a06646f9a770f03d505462e698f959b8.css" rel="stylesheet" type="text/css"/>
-
-
+<link rel="stylesheet" href="assets/outside/css/jquery.emotions.fb.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body class="notrans withHeaderSearch">
@@ -222,21 +221,12 @@
                                 <div class="addTipTeaser">                                   
                                     <div class="row">
 
-                                        <img src="https://ss1.4sqi.net/img/venuepage/v2/add_tip_blank_avatar-92b48188df42db391a669d992defe0b8.png" height="32" width="32" />
+                                    <img src="https://ss1.4sqi.net/img/venuepage/v2/add_tip_blank_avatar-92b48188df42db391a669d992defe0b8.png" height="32" width="32" />
 
+                                    <textarea  type="text"  style="maxwidth: 80%; width:80%" class="form-control input-sm" rows="2" id="postcmt" name="postcmt"></textarea>
 
-                                        <textarea  type="text"  style="maxwidth: 80%; width:80%" class="form-control input-sm" rows="2" id="postcmt" name="postcmt"></textarea>
-
-
-                                        <input name="_token" id="_token" hidden="true" value="{!! csrf_token() !!}">
-
-
-                                        <button type="button"  class="btn btn-default" id="btnpostCmt">Post</button>
-
-                                                                                                            
-                                        
-                                        
-                                        
+                                    <input name="_token" id="_token" hidden="true" value="{!! csrf_token() !!}">
+                                    <button type="button"  class="btn btn-default" id="btnpostCmt">Post</button>                   
                                     </div>                                   
                                 </div>
                             </div>
@@ -435,8 +425,15 @@
                                           </div>
 
                                     
-                                         
-
+     
+     <script src="assets/outside/js/jquery.emotions.js"></script>             
+    <script>
+        $(document).ready(function(){
+       
+            $('#postcmt').emotions();
+            $('.tipText').emotions();
+        });
+    </script>
                                           
 </body>
 </html>
