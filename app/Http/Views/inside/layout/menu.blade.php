@@ -184,7 +184,7 @@
 
                                 <!--Menu list item-->
                                 <li class="<?php echo (in_array($controllerName, array('users')) && in_array($actionNameDefault, array('getDashboard'))) ? 'active-link' : '' ?>">
-                                    <a href="/inside">
+                                    <a href="/inside/users/index">
                                         <i class="fa fa-dashboard"></i>
                                         <span class="menu-title">
                                                     <strong>Dashboard</strong>

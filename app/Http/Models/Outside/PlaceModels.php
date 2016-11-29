@@ -21,7 +21,7 @@ class PlaceModels extends DbTable{
 
     public function getDetail($MaDuLieu){
         $select = DB::table('dulieu')
-            ->select ('dulieu.MaDuLieu','dulieu.SoNha','tendiadiem.TenDiaDiem','dichvu.TenDichVu','duong.TenDuong','phuong.TenPhuong','quanhuyen.TenQuanHuyen','tinhthanh.TenTinhThanh')
+            ->select ('dulieu.MaDuLieu','dulieu.SoNha','dulieu.KinhDo','dulieu.ViDo','dulieu.image_name','tendiadiem.TenDiaDiem','dichvu.TenDichVu','duong.TenDuong','phuong.TenPhuong','quanhuyen.TenQuanHuyen','tinhthanh.TenTinhThanh')
             ->where('MaDuLieu',$MaDuLieu)
             ->leftjoin('tendiadiem','tendiadiem.MaTenDiaDiem','=','dulieu.MaTenDiaDiem')
             ->leftjoin('duong','duong.MaDuong','=','dulieu.MaDuong')
@@ -32,6 +32,70 @@ class PlaceModels extends DbTable{
         return $select;
 
 
+    }
+
+    public function searchDichVu($tendichvu){
+        $data_dichvu = DB::table('dichvu')->get();
+        $data_dulieu = DB::table('dulieu')->get();
+        $result_dichvu =  Array();
+        $result_dulieu = Array();
+
+        foreach ($data_dichvu as $item){
+            if(strpos(strtolower($tendichvu),strtolower($item->TenDichVu)) !== false){
+                array_push($result_dichvu,$item->MaDichVu);
+            }
+        }
+
+        foreach ($data_dulieu as $item){
+            foreach ($result_dichvu as $itemdichvu){
+                if($item->MaDichVu == $itemdichvu)
+                    array_push($result_dulieu,$item->MaDuLieu);
+            }
+        }
+        $data_return = DB::table('dulieu')->whereIn('MaDuLieu',$result_dulieu)->get();
+        $list_Madiadiem = Array();
+        $list_Maduong = Array();
+        $list_Maphuong = Array();
+        $list_Maquanhuyen = Array();
+        $list_Matinhthanh = Array();
+        // lay tung cot trong du lieu thanh array
+        foreach ($data_return as $item){
+            array_push($list_Madiadiem,$item->MaTenDiaDiem);
+        }
+        foreach ($data_return as $item){
+            array_push($list_Maduong,$item->MaDuong);
+        }
+        foreach ($data_return as $item){
+            array_push($list_Maphuong,$item->MaPhuong);
+        }
+        foreach ($data_return as $item){
+            array_push($list_Maquanhuyen,$item->MaQuanHuyen);
+        }
+        foreach ($data_return as $item){
+            array_push($list_Matinhthanh,$item->MaTinhThanh);
+        }
+        $result = array();
+        foreach ($data_return as $item){
+
+            $data_tendiadiem = $this->getTenDiaDiembyID($item->MaTenDiaDiem);
+
+            $data_tenduong = $this->getDuongById($item->MaDuong);
+            $data_tenphuong = $this->getPhuongbyID($item->MaPhuong);
+            $data_tenquanhuyen = $this->getQuanHuyenbyID($item->MaQuanHuyen);
+            $data_tentinhthanh = $this->getTinhThanhbyID($item->MaTinhThanh);
+            $data_tendichvu = $this->getTenDichVubyID($item->MaDichVu);
+            $obj  = new SearchArray();
+            $obj->diadiem   = $data_tendiadiem;
+            $obj->duong     = $data_tenduong;
+            $obj->phuong    = $data_tenphuong;
+            $obj->quanhuyen = $data_tenquanhuyen;
+            $obj->tinhthanh = $data_tentinhthanh;
+            $obj->dichvu    = $data_tendichvu;
+            $obj->dulieu    = $item;
+
+            array_push($result,$obj);
+        }
+        return $result;
     }
 
     public function search($tukhoa){

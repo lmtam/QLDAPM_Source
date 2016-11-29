@@ -34,13 +34,46 @@
 .u-form-group button{
 	width:50%;
 	background-color: #1CB94E;
-	border: none;
-	outline: none;
+	border: 1px solid rgba(0,0,0,0.05);
+
 	color: #fff;
 	font-size: 14px;
 	font-weight: normal;
+	padding: 12px;
 	padding: 14px 0;
 	border-radius: 2px;
 	text-transform: uppercase;
 	display: inline;
+	text-align:center;
+}
+.has-error{
+	color: red;
+}
+.u-form-group span{
+	width:45%;
+	position:relative;
+	float: left;
+
+	text-decoration: none;
+	color: #fff;
+	border: 1px solid rgba(0,0,0,0.05);
+	padding: 12px;
+	border-radius: 2px;
+	font-size: 12px;
+	text-transform: uppercase;
+	margin: 0 0;
+	text-align:center;
+}
+.u-form-group  i{
+	position: relative;
+	float: left;
+	width: 20px;
+	top: 2px;
+}
+.u-form-group span:first-child{
+	background-color: #49639F;
+}
+
+.hidden{
+	display:none;
 }

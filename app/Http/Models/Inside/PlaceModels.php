@@ -38,7 +38,8 @@ class PlaceModels extends DbTable{
 
         $diadiemmodel   = new DiaDiemModels();
         $MaTenDiaDiem   = $diadiemmodel->add($data['TenDiaDiem']);
-
+        $img = explode('/', $data['image_name']);
+        $data['image_name'] = $img[count($img) - 1];
 
         $tenduong = $this->getDuongById($data['MaDuong']);
 
@@ -55,6 +56,7 @@ class PlaceModels extends DbTable{
         $placemodel->KinhDo         = $latlong['lng'];
         $placemodel->ViDo           = $latlong['lat'];
         $placemodel->ChuThich       = $data['ChuThich'];
+        $placemodel->image_name     = $data['image_name'];
         if($placemodel->save()){
             return $placemodel->MaDuLieu;
         }
@@ -66,8 +68,15 @@ class PlaceModels extends DbTable{
     public function edit($data){
         $diadiemmodel   = new DiaDiemModels();
         $diadiemmodel->edit($data['MaTenDiaDiem'],$data['TenDiaDiem']);
+        //chuyen doi ten file name image;
+        $img = explode('/', $data['image_name']);
+        $data['image_name'] = $img[count($img) - 1];
 
-        $placemodel = new PlaceModels();
+        $tenduong = $this->getDuongById($data['MaDuong']);
+
+        $latlong        = $this->get_lat_long($data['SoNha'].' '.$tenduong->TenDuong);
+
+        $placemodel = self::find($data['MaDuLieu']);
         $placemodel->MaDichVu       = $data['MaDichVu'];
         $placemodel->MaTenDiaDiem   = $data['MaTenDiaDiem'];
         $placemodel->SoNha          = $data['SoNha'];
@@ -75,9 +84,10 @@ class PlaceModels extends DbTable{
         $placemodel->MaPhuong       = $data['MaPhuong'];
         $placemodel->MaQuanHuyen    = $data['MaQuanHuyen'];
         $placemodel->MaTinhThanh    = $data['MaTinhThanh'];
-        $placemodel->KinhDo         = 10.762522;
-        $placemodel->ViDo           = 106.682324;
+        $placemodel->KinhDo         = $latlong['lng'];
+        $placemodel->ViDo           = $latlong['lat'];
         $placemodel->ChuThich       = $data['ChuThich'];
+        $placemodel->image_name     = $data['image_name'];
         if($placemodel->save()){
             return $placemodel->MaDuLieu;
         }
@@ -225,9 +235,9 @@ class PlaceModels extends DbTable{
 //            echo ($data_tenquanhuyen->TenQuanHuyen).",";
 //            echo ($data_tentinhthanh->TenTinhThanh)."<br>";
         }
-        echo '<pre>';
-        print_r($result);
-        die();
+//        echo '<pre>';
+//        print_r($result);
+//        die();
     }
     // kiem tra du lieu co trong mang array hay chua
     public function IsNotExit($str,array $array){

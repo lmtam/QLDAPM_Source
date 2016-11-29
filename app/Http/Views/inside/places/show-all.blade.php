@@ -70,7 +70,11 @@
 
 
                         </table>
-
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-6">
+                                @include("{$moduleName}.pagination", [$paginate])
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="clearfix"></div>

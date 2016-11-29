@@ -18,6 +18,9 @@
     <input type="input" name="username" placeholder="Tên tài khoản" value="{{ old('username') }}"/>
    </div>
    <div class="u-form-group">
+    <input type="input" name="fullname" placeholder="Full name" value="{{ old('fullname') }}"/>
+   </div>
+   <div class="u-form-group">
     <input type="password" name="password" placeholder="Mật khẩu"value="{{ old('password') }}"/>
    </div>
    <div class="u-form-group">

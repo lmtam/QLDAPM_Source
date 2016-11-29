@@ -35,8 +35,8 @@ return [
 		'secret' => '',
 	],
     'facebook' => [
-        'client_id' => '672329992933441',
-        'client_secret' => '1af1be5f13ae2ca9edec1481343de215',
-        'redirect' => '',
-    ],
+		'client_id' => '672329992933441',
+		'client_secret' => '1af1be5f13ae2ca9edec1481343de215',
+		'redirect' => 'http://localhost/vnfinder/public/facebook/callback',
+	],
 ];

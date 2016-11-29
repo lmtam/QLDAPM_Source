@@ -8,6 +8,7 @@
   <link href="assets/outside/css/master-a06646f9a770f03d505462e698f959b8.css" type="text/css" rel="stylesheet"/>
   <link href="./assets/outside/css/standalone-pages/new-homepage-b10d40c14fb7461378d4556f9204e3be.css" type="text/css" rel="stylesheet"/>
     <link href="/assets/outside/css/login.css" rel="stylesheet">
+  <link href="/assets/outside/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <script type="text/javascript">window.fourSq = window.fourSq || {}; fourSq.queue = [];</script>
 
   <script type="text/javascript" src="./assets/outside/js/third_party/jquery-1.7.2.min-b8d64d0bc142b3f670cc0611b0aebcae.js"></script>
@@ -18,6 +19,13 @@
   <script type="text/javascript" src="./assets/outside/js/build/en/foursquare/new-homepage-d1bebac5ea32225d2079bb1bc4b42c3c.js"></script>
 
 </head>
+<?php
+
+Session::put('message','');
+Session::save();
+//    $url_login = '/login';
+
+?>
 <body class="notrans withoutHeaderSearch withProductBar">
   <div id="wrapper"  style="padding-top:0px">
     <div class="desktopHeaderBarDrawerContainer " id="desktopHeaderBarDrawerContainer">
@@ -31,74 +39,94 @@
               <a href="#" id="logo">MyFinder</a>
             </div>
           </div>
+          <?php
+          $isLogin = Session::get('IsLogin');
 
+          ?>
           <div class="rightSide">
-            <ul class="loggedOutMenu">
-              <!-- <li class="enterpriseSiteMenuLink"><a href="https://enterprise.foursquare.com/" class="enterprise">Foursquare for Enterprise</a></li> -->
-              <li class="aboutMenuLink"><a href="#" class="about">About MyFinder</a></li>
-              <!-- <li class="downloadAppMenuLink"><a href="download.html" class="getTheApp">Get the App</a></li> -->
-              <li><a href="https://foursquare.com/login?continue=%2F&amp;clicked=true" class="log btn">Log In</a></li>
-              <li><a href="signup/index.html"  id="signupButton" class="sign btn">Sign Up</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="desktopHeaderDrawer">
-          <div class="wrap">
-            <div class="locationPivotDrawer drawer">
-              <div class="nearbyLocationsBlock">
-                <div class="label">Nearby:</div>
-                <ul class="nearbyLocations">
-
-                </ul>
-              </div>
-              <div class="getInspiredBlock">
-                <div class="label">Get inspired:</div>
-                <ul class="inspirationalLocations">
-
-                </ul>
-              </div>
-            </div>
-            <div class="queryPivotDrawer drawer ">
-              <ul class="chiclets">
-                <li class="chiclet topPicks" data-cat="topPicks">
-                  <a class="chicletLink" href="explore9f70.html?cat=topPicks">
-                    <span class="chicletText">Top Picks</span>
-                  </a>
+            @if($isLogin != true)
+              <ul class="loggedOutMenu">
+                <li>
+                  <a href="/login" data-toggle="modal" data-target="#login-modal" class="log btn">Log In</a>
                 </li>
-                <li class="chiclet trending" data-cat="trending">
-                  <a class="chicletLink" href="explore0489.html?cat=trending">
-                    <span class="chicletText">Trending</span>
-                  </a>
-                </li>
-                <li class="chiclet food" data-cat="food">
-                  <a class="chicletLink" href="exploredb64.html?cat=food">
-                    <span class="chicletText">Food</span>
-                  </a>
-                </li>
-                <li class="chiclet coffee" data-cat="coffee">
-                  <a class="chicletLink" href="explore9863.html?cat=coffee">
-                    <span class="chicletText">Coffee</span>
-                  </a>
-                </li>
-                <li class="chiclet drinks" data-cat="drinks">
-                  <a class="chicletLink" href="explore091e.html?cat=drinks">
-                    <span class="chicletText">Nightlife</span>
-                  </a>
-                </li>
-                <li class="chiclet arts" data-cat="arts">
-                  <a class="chicletLink" href="explorece43.html?cat=arts">
-                    <span class="chicletText">Fun</span>
-                  </a>
-                </li>
-                <li class="chiclet shops" data-cat="shops">
-                  <a class="chicletLink" href="explore55c5.html?cat=shops">
-                    <span class="chicletText">Shopping</span>
-                  </a>
+                <li>
+                  <a href="/signup"  id="signupButton" class="sign btn">Sign Up</a>
                 </li>
               </ul>
-            </div>
+            @else
+              <div id="user">
+                <a class="userPathLink" href="/user">
+                  <span class="pic"><img src="/assets/outside/img/avatar.png" alt="Tâm L." class="avatar " width="64" height="64" title="Tâm L."></span>
+                  Tâm<i class="fa fa-angle-down fa-2x" style="margin-top: 15px;" ></i>
+                </a>
+                <div id="userMenu">
+                  <ul>
+                    <li class="myProfile"><a class="userTodoLink" href="/showSave">Saved</a></li>
+                    <li><a href="/logout" class="logoutLink" id="logoutLink" >Log Out</a></li>
+                  </ul>
+                </div>
+              </div>
+            @endif
           </div>
         </div>
+        {{--<div class="desktopHeaderDrawer">--}}
+          {{--<div class="wrap">--}}
+            {{--<div class="locationPivotDrawer drawer">--}}
+              {{--<div class="nearbyLocationsBlock">--}}
+                {{--<div class="label">Nearby:</div>--}}
+                {{--<ul class="nearbyLocations">--}}
+
+                {{--</ul>--}}
+              {{--</div>--}}
+              {{--<div class="getInspiredBlock">--}}
+                {{--<div class="label">Get inspired:</div>--}}
+                {{--<ul class="inspirationalLocations">--}}
+
+                {{--</ul>--}}
+              {{--</div>--}}
+            {{--</div>--}}
+            {{----}}
+            {{--<div class="queryPivotDrawer drawer ">--}}
+              {{--<ul class="chiclets">--}}
+                {{--<li class="chiclet topPicks" data-cat="topPicks">--}}
+                  {{--<a class="chicletLink" href="{!! $url_caphe !!}">--}}
+                    {{--<span class="chicletText">Cafe</span>--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li class="chiclet trending" data-cat="trending">--}}
+                  {{--<a class="chicletLink" href="explore0489.html?cat=trending">--}}
+                    {{--<span class="chicletText">Trending</span>--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li class="chiclet food" data-cat="food">--}}
+                  {{--<a class="chicletLink" href="exploredb64.html?cat=food">--}}
+                    {{--<span class="chicletText">Food</span>--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li class="chiclet coffee" data-cat="coffee">--}}
+                  {{--<a class="chicletLink" href="{!! $url_caphe !!}">--}}
+                    {{--<span class="chicletText">Coffee</span>--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li class="chiclet drinks" data-cat="drinks">--}}
+                  {{--<a class="chicletLink" href="explore091e.html?cat=drinks">--}}
+                    {{--<span class="chicletText">Nightlife</span>--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li class="chiclet arts" data-cat="arts">--}}
+                  {{--<a class="chicletLink" href="explorece43.html?cat=arts">--}}
+                    {{--<span class="chicletText">Fun</span>--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li class="chiclet shops" data-cat="shops">--}}
+                  {{--<a class="chicletLink" href="explore55c5.html?cat=shops">--}}
+                    {{--<span class="chicletText">Shopping</span>--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+              {{--</ul>--}}
+            {{--</div>--}}
+          {{--</div>--}}
+        {{--</div>--}}
       </div>
     </div>
     <div id="container" class="wrap">
@@ -131,29 +159,37 @@
                   </button>
                 </form>
               </div>
+              <?php
+              $url_caphe    = route('places.getService',['tendichvu' => 'Quán café']);
+              $url_quanan   = route('places.getService',['tendichvu' => 'Quán ăn']);
+              $url_benhvien = route('places.getService',['tendichvu' => 'Bệnh viện']);
+              $url_ATM      = route('places.getService',['tendichvu' => 'ATM']);
+              $url_shopping = route('places.getService',['tendichvu' => 'Shop thời trang']);
+
+              ?>
               <ul class="chiclets">
-                <li class="food simpleChiclet">
-                  <a class="chicletLink" href="explore937c.html?near=Ho%20Chi%20Minh%20City&amp;cat=food">
-                    <span class="chicletText">Food</span>
+                <li class=" simpleChiclet">
+                  <a class="chicletLink" href="{!! $url_quanan !!}">
+                    <span class="chicletText">Quán ăn</span>
                   </a>
                 </li>
-                <li class="coffee simpleChiclet">
-                  <a class="chicletLink" href="explore113e.html?near=Ho%20Chi%20Minh%20City&amp;cat=coffee">
-                    <span class="chicletText">Coffee</span>
+                <li class=" simpleChiclet">
+                  <a class="chicletLink" href="{!! $url_caphe !!}">
+                    <span class="chicletText">Quán cafe</span>
                   </a>
                 </li>
-                <li class="drinks simpleChiclet">
-                  <a class="chicletLink" href="explore7a7f.html?near=Ho%20Chi%20Minh%20City&amp;cat=drinks">
-                    <span class="chicletText">Nightlife</span>
+                <li class=" simpleChiclet">
+                  <a class="chicletLink" href="{!! $url_benhvien !!}">
+                    <span class="chicletText">Bệnh viện</span>
                   </a>
                 </li>
-                <li class="arts simpleChiclet">
-                  <a class="chicletLink" href="exploreb7fd.html?near=Ho%20Chi%20Minh%20City&amp;cat=arts">
-                    <span class="chicletText">Fun</span>
+                <li class=" simpleChiclet">
+                  <a class="chicletLink" href="{!! $url_ATM !!}">
+                    <span class="chicletText">ATM</span>
                   </a>
                 </li>
-                <li class="shops simpleChiclet">
-                  <a class="chicletLink" href="explore59eb.html?near=Ho%20Chi%20Minh%20City&amp;cat=shops">
+                <li class=" simpleChiclet">
+                  <a class="chicletLink" href="{!! $url_shopping !!}">
                     <span class="chicletText">Shopping</span>
                   </a>
                 </li>
@@ -174,37 +210,37 @@
       <div class="footerWrapper lightFooter">
         <div id="sidebarFooter" class="notrans">
           <img src="assets/outside/img/footer-top-fa1353033c43b8d9c1ea995d2b66371e.png"
-          alt="" width="279" height="12" data-retina-url="https://ss0.4sqi.net/img/footer-top@2x-ef6ccfa1b4ce50e9257b922d1c8935ac.png" />
+          alt="" width="279" height="12"  />
           <ul class="notrans">
            <li>
-             <a href="about.html">About</a>
+             <a href="#">About</a>
            </li>
            <li>
-             <a href="http://blog.foursquare.com/">Blog</a>
+             <a href="#">Blog</a>
            </li>
            <li>
-             <a href="http://business.foursquare.com/">Businesses</a>
+             <a href="#">Businesses</a>
            </li>
            <li>
-             <a href="cities.html">Cities</a>
+             <a href="#">Cities</a>
            </li>
            <li>
-             <a href="http://developer.foursquare.com/">Developers</a>
+             <a href="#">Developers</a>
            </li>
            <li>
-             <a href="http://support.foursquare.com/">Help</a>
+             <a href="#">Help</a>
            </li>
            <li>
-             <a href="jobs/index.html">Jobs</a>
+             <a href="#">Jobs</a>
            </li>
            <li>
-             <a href="legal/cookiepolicy.html">Cookies (Updated)</a>
+             <a href="#">Cookies (Updated)</a>
            </li>
            <li>
-             <a href="legal/privacy.html">Privacy (Updated)</a>
+             <a href="#">Privacy (Updated)</a>
            </li>
            <li>
-             <a href="legal/terms.html">Terms</a>
+             <a href="#">Terms</a>
            </li>
            <li>
              <span id="currentLanguage" class="link">English</span>

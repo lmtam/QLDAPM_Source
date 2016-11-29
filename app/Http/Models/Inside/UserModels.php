@@ -67,6 +67,7 @@ class UserModels extends DbTable{
 
             $object->user_name = $data['username'];
             $object->user_password = $data['password'];
+            $object->fullname       = $data['fullname'];
             $object->created_day = date('Y-m-d');
             $object->isadmin = 1;
             if ($object->save()) {
