@@ -21,7 +21,7 @@ class PlaceModels extends DbTable{
 
     public function getDetail($MaDuLieu){
         $select = DB::table('dulieu')
-            ->select ('dulieu.MaDuLieu','dulieu.SoNha','tendiadiem.TenDiaDiem','dichvu.TenDichVu','duong.TenDuong','phuong.TenPhuong','quanhuyen.TenQuanHuyen','tinhthanh.TenTinhThanh')
+            ->select ('dulieu.MaDuLieu','dulieu.SoNha','dulieu.KinhDo','dulieu.ViDo','dulieu.image_name','tendiadiem.TenDiaDiem','dichvu.TenDichVu','duong.TenDuong','phuong.TenPhuong','quanhuyen.TenQuanHuyen','tinhthanh.TenTinhThanh')
             ->where('MaDuLieu',$MaDuLieu)
             ->leftjoin('tendiadiem','tendiadiem.MaTenDiaDiem','=','dulieu.MaTenDiaDiem')
             ->leftjoin('duong','duong.MaDuong','=','dulieu.MaDuong')
@@ -33,18 +33,19 @@ class PlaceModels extends DbTable{
 
 
     }
+
     public function searchDichVu($tendichvu){
         $data_dichvu = DB::table('dichvu')->get();
         $data_dulieu = DB::table('dulieu')->get();
         $result_dichvu =  Array();
         $result_dulieu = Array();
-        
+
         foreach ($data_dichvu as $item){
             if(strpos(strtolower($tendichvu),strtolower($item->TenDichVu)) !== false){
                 array_push($result_dichvu,$item->MaDichVu);
             }
         }
-        
+
         foreach ($data_dulieu as $item){
             foreach ($result_dichvu as $itemdichvu){
                 if($item->MaDichVu == $itemdichvu)
@@ -177,7 +178,7 @@ class PlaceModels extends DbTable{
             $obj->dulieu    = $item;
 
             array_push($result,$obj);
-//            array_push($result);
+//            array_push($result)
 //
 //            echo ("<h3><font color=\"blue\">");
 //            echo ($data_tendiadiem->TenDiaDiem).": </h3></font>";
@@ -193,9 +194,8 @@ class PlaceModels extends DbTable{
     // kiem tra du lieu co trong mang array hay chua
     public function IsNotExit($str,array $array){
         foreach ($array as $item){
-            if($item == $str){
+            if($item == $str)
                 return false;
-            }
         }
         return true;
     }
