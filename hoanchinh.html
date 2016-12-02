@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+	  .venueBlock .venueDetails .venueData {
+    color: #959b9e;
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: -2px;
+}
+div {
+    display: block;
+}
+	  .mapVenueTooltip .venueBlock .venueDetails .venueData, .mapTooltip .venueBlock .venueDetails .venueData, .specialDetails .venueBlock .venueDetails .venueData {
+   	 	color: #959b9e;
+    	font-size: 10px;
+    	font-weight: bold;
+    	margin-top: -1px;
+	}
+    </style>
+    
+    <?php 
+	$hinh =1;
+	?>
+    <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var map;
+      var infowindow;
+
+		
+		
+      function initMap() {
+		var diadiem = new Array()
+        var pyrmont = {lat: 10.754206, lng: 106.678208};
+		var khtn = {lat: 10.762945, lng: 106.682059};
+		/*for(var i=0; i<2; i++){
+				diadiem.push(pyrmont);
+			}*/
+			
+			diadiem.push(pyrmont);
+			diadiem.push(khtn);
+			
+			
+			console.log(diadiem[1]['lat']);
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: diadiem[1],
+		  zoomControl: true,
+          scaleControl: true,
+
+          zoom: 15
+        });
+		// hiển thị thông tin ghi chú
+		contentString = new Array();
+
+		var image = "1.png";
+		contentString[0] = '<table bordercolor="#0000CC"><tr><td height="42" width="42" rowspan="2" background="do an.png" style="background-size: 100% 100%;"></td><td colspan="2"><a href="#">Quan An Quan 8 Day</a></td></tr><tr><td height="42" width="42" rowspan="2" style="background-size: 100% 100%;" background="<?php if($hinh==0){echo "bun.jpg";}else{if($hinh==1){echo "binh thuong.jpg";}else{echo "vui.jpg";}} ?>"  ></td><td>Địa chỉ quán</td></tr><tr><td align="center" bgcolor="#999999">1</td><td >Vị trí - Giá Tiền</td></tr> </table>';
+		contentString[1] = "xyz";
+		var infowindow = new google.maps.InfoWindow({
+			  content: "",
+			  
+			}); 
+		
+		for(var i = 0; i < 2; i++ )
+		{
+			
+			
+			var marker = new google.maps.Marker({
+         	 position: diadiem[i],
+         	 map: map,
+          	 title: 'Hello World!',
+			icon: image
+        	});
+			incontent(marker, map, infowindow, contentString[i]);
+		}
+		
+		function incontent(marker,map, infowindow, mota)
+		{
+			marker.addListener('mousemove', function() {
+          	infowindow.open(map, marker);
+			infowindow.setContent(mota)
+        	});
+			marker.addListener('mouseout',function(){
+				infowindow.close();
+				});	
+			
+			
+			
+		}
+			
+	  }
+
+    
+     
+    </script>
+  </head>
+  <body>
+  <?php
+  	$bien = 1;
+	
+  ?>
+  
+  		
+
+  
+  
+    <div id="map">
+    	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9pF96R--7AvEVpK1qjEeIRhAbX92svPI&libraries=places&callback=initMap" async defer></script>
+    </div>
+    
+  </body>
+</html>
