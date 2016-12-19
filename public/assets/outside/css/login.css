@@ -2,7 +2,7 @@
 	position:relative;
 	margin: 10px auto;
 	width: 500px;
-	height: 420px;
+	height: 350px;
 	background-color: #fff;
 	padding: 10px;
 	border-radius: 3px;
@@ -16,7 +16,7 @@
 }
 .u-form-group input[type="input"],
 .u-form-group input[type="password"]{
-	width: 100%;
+	width: 95%;
 	height:45px;
 	outline: none;
 	border: 1px solid #ddd;
@@ -30,6 +30,10 @@
 }
 .u-form-group input:focus{
 	border-color: #358efb;
+}
+.u-form-group a p {
+	float:right;
+	margin-top:5px;
 }
 .u-form-group button{
 	width:50%;
@@ -59,18 +63,27 @@
 	border: 1px solid rgba(0,0,0,0.05);
 	padding: 12px;
 	border-radius: 2px;
-	font-size: 12px;
+	font-size: 11px;
 	text-transform: uppercase;
 	margin: 0 0;
 	text-align:center;
+	
 }
 .u-form-group  i{
 	position: relative;
 	float: left;
 	width: 20px;
 	top: 2px;
+	margin-right: 3px;
+	
 }
 .u-form-group span:first-child{
 	background-color: #49639F;
+	float:right;
+	height:15px;
+	margin-bottom:10px;
 }
 
+.hidden{
+	display:none;
+}

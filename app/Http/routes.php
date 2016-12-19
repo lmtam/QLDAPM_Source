@@ -14,8 +14,8 @@
 
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);
 
 
@@ -24,11 +24,11 @@ Route::group(['prefix' => '/'], function() {
     Route::get('/diadiem-{MaDuLieu}', ['as' => 'places.getDetail', 'uses' => 'Outside\PlaceControllers@getDetail']);
 //    Route::get('/diadiem-{MaDulieu}','Outside\PlaceControllers@getDetail');
 
-    Route::get('/login/back-url={url_back}',['as'=> 'users.login','uses' => 'Outside\UserControllers@getLogin']);
+    Route::get('/login',['as'=> 'users.login','uses' => 'Outside\UserControllers@getLogin']);
 //    Route::get('/login','Outside\UserControllers@getLogin');
 
-    Route::post('/login/back-url={url_back}',['as'=> 'users.login','uses' => 'Outside\UserControllers@postLogin']);
-
+    Route::post('/login',['as'=> 'users.login','uses' => 'Outside\UserControllers@postLogin']);
+    Route::get('/logout','Outside\UserControllers@getLogout');
 
     Route::get('/','Outside\PlaceControllers@getIndex');
     Route::get('/signup','Outside\UserControllers@getSignup');
@@ -36,12 +36,25 @@ Route::group(['prefix' => '/'], function() {
 
     Route::get('/search','Outside\PlaceControllers@getSearchResult');
     Route::get('/search/{tendichvu}', ['as' => 'places.getService', 'uses' => 'Outside\PlaceControllers@getSearchService']);
-//    Route::get('detail-{MaDuLieu}','Outside\PlaceControllers@getDetail');
-});
+    Route::post('/comments','Outside\PlaceControllers@postComment');
 
+    Route::get('/facebook/redirect', 'Auth\SocialController@redirectToProvider');
+    Route::get('/facebook/callback', 'Auth\SocialController@handleProviderCallback');
+
+
+    Route::post('/addrating','Outside\PlaceControllers@postRating');
+    Route::post('/deleterating','Outside\PlaceControllers@postDeleteRating');
+
+    Route::post('/addsave','Outside\PlaceControllers@postSave');
+    Route::post('/deletesave','Outside\PlaceControllers@postDeleteSave');
+    Route::get('/showSave','Outside\PlaceControllers@getSave');
+
+});
+Route::get('/getMapPlace','Outside\PlaceController@getMapPlace');
 
 Route::group(['prefix' => 'inside'],function (){
     Route::controller('users','Inside\UserControllers');
     Route::controller('places','Inside\PlaceControllers');
     Route::controller('comments','Inside\CommentControllers');
 });
+

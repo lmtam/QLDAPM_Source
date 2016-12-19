@@ -51,9 +51,7 @@ class PlaceControllers extends MyController{
     }
     public function postAdd(PlaceRequests $requests){
         $post = $requests->all();
-        echo "<pre>";
-        print_r($post);
-        die();
+
         if($this->_model->add($post) != null){
             return redirect("{$this->data['moduleName']}/{$this->data['controllerName']}/show-all");
         }

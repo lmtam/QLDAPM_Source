@@ -21,7 +21,7 @@ class PlaceModels extends DbTable{
 
     public function getDetail($MaDuLieu){
         $select = DB::table('dulieu')
-            ->select ('dulieu.MaDuLieu','dulieu.SoNha','tendiadiem.TenDiaDiem','dichvu.TenDichVu','duong.TenDuong','phuong.TenPhuong','quanhuyen.TenQuanHuyen','tinhthanh.TenTinhThanh')
+            ->select ('dulieu.MaDuLieu','dulieu.SoNha','dulieu.KinhDo','dulieu.ViDo','dulieu.image_name','tendiadiem.TenDiaDiem','dichvu.TenDichVu','duong.TenDuong','phuong.TenPhuong','quanhuyen.TenQuanHuyen','tinhthanh.TenTinhThanh')
             ->where('MaDuLieu',$MaDuLieu)
             ->leftjoin('tendiadiem','tendiadiem.MaTenDiaDiem','=','dulieu.MaTenDiaDiem')
             ->leftjoin('duong','duong.MaDuong','=','dulieu.MaDuong')
@@ -92,7 +92,8 @@ class PlaceModels extends DbTable{
             $obj->tinhthanh = $data_tentinhthanh;
             $obj->dichvu    = $data_tendichvu;
             $obj->dulieu    = $item;
-
+            $model_rating = new RatingModels();
+            $obj->pointRating = $model_rating->RatingPoint($item->MaDuLieu);
             array_push($result,$obj);
         }
         return $result;
@@ -168,6 +169,8 @@ class PlaceModels extends DbTable{
             $data_tenquanhuyen = $this->getQuanHuyenbyID($item->MaQuanHuyen);
             $data_tentinhthanh = $this->getTinhThanhbyID($item->MaTinhThanh);
             $data_tendichvu = $this->getTenDichVubyID($item->MaDichVu);
+
+
             $obj  = new SearchArray();
             $obj->diadiem   = $data_tendiadiem;
             $obj->duong     = $data_tenduong;
@@ -176,6 +179,8 @@ class PlaceModels extends DbTable{
             $obj->tinhthanh = $data_tentinhthanh;
             $obj->dichvu    = $data_tendichvu;
             $obj->dulieu    = $item;
+            $model_rating = new RatingModels();
+            $obj->pointRating = $model_rating->RatingPoint($item->MaDuLieu);
 
             array_push($result,$obj);
 //            array_push($result)
@@ -230,6 +235,7 @@ class PlaceModels extends DbTable{
         return $select;
     }
 
+
 }
 class SearchArray{
     public $diadiem;
@@ -239,5 +245,6 @@ class SearchArray{
     public $quanhuyen;
     public $tinhthanh;
     public $dulieu;
+    public $pointRating;
 
 }
